@@ -26,7 +26,7 @@ class Index implements Responsable
 
     public function toResponse($request): View
     {
-        return $this->view->make('network.index', [
+        return $this->view->make('network::index', [
             'networks' => $this->networks,
         ]);
     }
