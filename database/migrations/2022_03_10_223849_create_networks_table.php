@@ -15,8 +15,10 @@ return new class extends Migration
             $table->string('network_id')->nullable();
             $table->string('driver');
             $table->string('scope');
+            $table->foreignId('network_type_id')->constrained();
             $table->boolean('is_active')->default(false);
             $table->string('description')->nullable();
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
             $table->softDeletes();
         });
