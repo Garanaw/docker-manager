@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Infrastructure\Seed;
 
+use App\Infrastructure\Seed\Seeder;
 use Infrastructure\Migration\Migration;
 use Illuminate\Database\Events\MigrationEnded as Event;
 use Illuminate\Foundation\Application;
@@ -39,9 +40,9 @@ class MigrationEnded
 
         $startTime = microtime(true);
 
-        $migration->getSeeders()->each(function ($seederName) {
+        $migration->getSeeders()->each(function ($seederName) use ($migration) {
             $name = $this->getSeederName($seederName);
-            $seeder = $this->app->make($seederName);
+            $seeder = $this->makeSeeder($seederName, $migration);
             $this->note(sprintf('<info>Running seeder</info>: %s', $name));
             $seeder->run();
         });
@@ -51,9 +52,11 @@ class MigrationEnded
         $this->note(sprintf('<info>Seeded:</info> %s (%d seconds)', $name, $runTime));
     }
 
-    private function note(string $message): void
+    private function makeSeeder(string $seederName, Migration $migration): Seeder
     {
-        $this->output?->writeln($message);
+        return $this->app->makeWith($seederName, [
+            'table' => $migration->getTable(),
+        ]);
     }
 
     private function getMigrationName(Migration $path): string
@@ -65,5 +68,10 @@ class MigrationEnded
     {
         $pieces = explode('/', $path);
         return end($pieces);
+    }
+
+    private function note(string $message): void
+    {
+        $this->output?->writeln($message);
     }
 }

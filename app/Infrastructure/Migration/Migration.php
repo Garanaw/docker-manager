@@ -15,31 +15,27 @@ use Illuminate\Support\Collection;
 
 abstract class Migration extends BaseMigration
 {
-    protected ?string $table = null;
-
     protected Connection $db;
-
     protected Builder $schema;
-
-    protected Collection $seeders;
+    protected array $seeders = [];
+    protected ?string $table = null;
 
     public function __construct()
     {
         $manager = app(DatabaseManager::class);
         $this->db = $manager->connection();
         $this->schema = $manager->getSchemaBuilder();
-        $this->seeders = new Collection();
         $this->setBlueprint(CustomBlueprint::class);
     }
 
     public function hasSeeders(): bool
     {
-        return $this->seeders->isNotEmpty();
+        return $this->getSeeders()->isNotEmpty();
     }
 
     public function getSeeders(): Collection
     {
-        return $this->seeders;
+        return collect($this->seeders);
     }
 
     public function getTable(): ?string
