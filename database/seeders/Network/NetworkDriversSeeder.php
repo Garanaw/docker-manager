@@ -6,7 +6,6 @@ namespace Database\Seeders\Network;
 
 use App\Domain\Network\Enum\Driver;
 use App\Infrastructure\Seed\Seeder;
-use Illuminate\Support\Carbon;
 
 class NetworkTypesSeeder extends Seeder
 {
