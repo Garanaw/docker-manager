@@ -13,7 +13,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('network_id')->nullable();
-            $table->string('driver');
             $table->string('scope');
             $table->foreignId('network_type_id')->constrained();
             $table->boolean('is_active')->default(false);

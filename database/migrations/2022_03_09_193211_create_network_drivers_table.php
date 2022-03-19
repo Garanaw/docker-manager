@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-use Database\Seeders\Network\NetworkTypesSeeder;
+use Database\Seeders\Network\NetworkDriversSeeder;
 use Infrastructure\Migration\Blueprint;
 use Infrastructure\Migration\Migration;
 
 return new class extends Migration
 {
-    protected ?string $table = 'network_types';
+    protected ?string $table = 'network_drivers';
     protected array $seeders = [
-        NetworkTypesSeeder::class,
+        NetworkDriversSeeder::class,
     ];
 
     public function up(): void
@@ -25,6 +25,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        $this->schema->dropIfExists('network_types');
+        $this->schema->dropIfExists($this->getTable());
     }
 };

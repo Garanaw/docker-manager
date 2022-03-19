@@ -7,7 +7,7 @@ namespace Database\Seeders\Network;
 use App\Domain\Network\Enum\Driver;
 use App\Infrastructure\Seed\Seeder;
 
-class NetworkTypesSeeder extends Seeder
+class NetworkDriversSeeder extends Seeder
 {
     public function run(): void
     {
