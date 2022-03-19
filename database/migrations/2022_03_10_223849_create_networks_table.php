@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('network_id')->nullable();
             $table->string('scope');
-            $table->foreignId('network_type_id')->constrained();
+            $table->foreignId('network_driver_id')->constrained();
             $table->boolean('is_active')->default(false);
             $table->string('description')->nullable();
             $table->foreignId('user_id')->constrained();
