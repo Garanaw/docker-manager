@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Network\Services;
+namespace Domain\Network\Services;
 
-use App\Domain\Network\Dto\CreateNetworkDto;
-use App\Infrastructure\Network\Models\Network;
-use App\Infrastructure\Network\Repositories\NetworkWriter as Writer;
+use Domain\Network\Dto\CreateNetworkDto;
+use Infrastructure\Network\Models\Network;
+use Infrastructure\Network\Repositories\NetworkWriter as Writer;
 
 class NetworkWriter
 {

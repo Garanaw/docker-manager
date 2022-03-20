@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Seeders\Network;
 
-use App\Domain\Network\Enum\Driver;
-use App\Infrastructure\Seed\Seeder;
+use Domain\Network\Enum\Driver;
+use Infrastructure\Seed\Seeder;
 
 class NetworkDriversSeeder extends Seeder
 {

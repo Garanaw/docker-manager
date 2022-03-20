@@ -178,7 +178,7 @@ return [
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
         App\Providers\JetstreamServiceProvider::class,
-        App\Domain\Network\Providers\RouteServiceProvider::class,
+        Domain\Network\Providers\RouteServiceProvider::class,
     ],
 
     /*

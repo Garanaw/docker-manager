@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Shared\Contracts;
+namespace Infrastructure\Shared\Contracts;
 
 interface HasId
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Infrastructure\Seed;
 
-use App\Infrastructure\Seed\Seeder;
+use Infrastructure\Seed\Seeder;
 use Infrastructure\Migration\Migration;
 use Illuminate\Database\Events\MigrationEnded as Event;
 use Illuminate\Foundation\Application;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Network\Providers;
+namespace Domain\Network\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;

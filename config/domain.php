@@ -3,7 +3,7 @@
 return [
     'network' => [
         'providers' => [
-            App\Domain\Network\Providers\ViewServiceProvider::class,
+            Domain\Network\Providers\ViewServiceProvider::class,
         ],
     ],
 ];

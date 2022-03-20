@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Network\Responses;
+namespace Application\Network\Responses;
 
 use Illuminate\Contracts\Support\Responsable;
 use Illuminate\Database\Eloquent\Collection;

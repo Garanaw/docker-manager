@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Network\Dto;
+namespace Domain\Network\Dto;
 
-use App\Domain\Network\Caster\EnumCaster\DriverCaster;
-use App\Domain\Network\Caster\EnumCaster\ScopeCaster;
-use App\Domain\Network\Enum\Driver;
-use App\Domain\Network\Enum\Scope;
+use Domain\Network\Caster\EnumCaster\DriverCaster;
+use Domain\Network\Caster\EnumCaster\ScopeCaster;
+use Domain\Network\Enum\Driver;
+use Domain\Network\Enum\Scope;
 use Infrastructure\Shared\Models\User;
 use Spatie\DataTransferObject\Attributes\CastWith;
 use Spatie\DataTransferObject\DataTransferObject;

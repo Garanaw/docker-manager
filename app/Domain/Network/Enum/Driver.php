@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Network\Enum;
+namespace Domain\Network\Enum;
 
 use Illuminate\Support\Collection;
 

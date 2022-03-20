@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Network\Repositories;
+namespace Infrastructure\Network\Repositories;
 
-use App\Domain\Network\Dto\CreateNetworkDto;
-use App\Infrastructure\Network\Models\Network;
-use App\Infrastructure\Network\Models\NetworkDriver;
-use App\Infrastructure\Network\Models\NetworkSetting;
+use Domain\Network\Dto\CreateNetworkDto;
+use Infrastructure\Network\Models\Network;
+use Infrastructure\Network\Models\NetworkDriver;
+use Infrastructure\Network\Models\NetworkSetting;
 use Illuminate\Database\DatabaseManager;
 
 class NetworkWriter

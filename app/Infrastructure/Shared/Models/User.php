@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Infrastructure\Shared\Models;
 
-use App\Infrastructure\Network\Models\Network;
+use Infrastructure\Network\Models\Network;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Network\Models;
+namespace Infrastructure\Network\Models;
 
-use App\Infrastructure\Shared\Contracts\HasId;
+use Infrastructure\Shared\Contracts\HasId;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;

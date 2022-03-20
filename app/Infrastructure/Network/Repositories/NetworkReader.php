@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Infrastructure\Network\Repositories;
+namespace Infrastructure\Network\Repositories;
 
-use App\Infrastructure\Network\Models\Network;
+use Infrastructure\Network\Models\Network;
 use Illuminate\Database\Eloquent\Collection;
 
 class NetworkReader

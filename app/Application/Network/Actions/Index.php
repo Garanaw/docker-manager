@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Application\Network\Actions;
 
-use App\Application\Network\Responses\Index as Response;
-use App\Domain\Network\Services\NetworkReader as Reader;
+use Application\Network\Responses\Index as Response;
+use Domain\Network\Services\NetworkReader as Reader;
 use Illuminate\Contracts\Support\Responsable;
 
 class Index
