@@ -24,7 +24,7 @@ class Store
             ]);
         }
 
-        return $redirect->route('network.show', [
+        return $redirect->route('networks.show', [
             'network' => $network->getId(),
         ]);
     }
