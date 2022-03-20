@@ -2,7 +2,7 @@
 
 return [
     'network' => [
-        'service_providers' => [
+        'providers' => [
             App\Domain\Network\Providers\ViewServiceProvider::class,
         ],
     ],
