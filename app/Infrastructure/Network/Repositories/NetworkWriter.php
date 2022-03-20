@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Infrastructure\Network\Repositories;
 
 use Domain\Network\Dto\CreateNetworkDto;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Infrastructure\Network\Models\Network;
 use Infrastructure\Network\Models\NetworkDriver;
 use Infrastructure\Network\Models\NetworkSetting;
@@ -21,7 +22,7 @@ class NetworkWriter
 
     public function create(CreateNetworkDto $dto): Network
     {
-        $this->db->transaction(function () use ($dto): Network {
+        return $this->db->transaction(function () use ($dto): Network {
             return $this->saveSettings(
                 $dto,
                 $this->saveNetwork($dto)
@@ -32,6 +33,10 @@ class NetworkWriter
     private function saveNetwork(CreateNetworkDto $dto): Network
     {
         $driver = $this->getNetworkDriverByName($dto->getDriver()->name);
+
+        if ($driver === null) {
+            throw new ModelNotFoundException('Driver not found');
+        }
 
         $this->model->fill(array_merge($dto->networkDataToArray(), [
             'network_driver_id' => $driver->getId(),

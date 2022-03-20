@@ -19,6 +19,7 @@ class Network extends Model implements HasId
         'scope',
         'is_active',
         'description',
+        'network_driver_id',
     ];
 
     protected $casts = [
@@ -33,6 +34,11 @@ class Network extends Model implements HasId
     public function settings(): HasOne
     {
         return $this->hasOne(NetworkSetting::class);
+    }
+
+    public function driver(): BelongsTo
+    {
+        return $this->belongsTo(NetworkDriver::class);
     }
 
     public function getId(): int

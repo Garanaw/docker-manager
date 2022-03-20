@@ -13,7 +13,7 @@ class Show
     public function __invoke(Network $network, Factory $view): View
     {
         return $view->make('network::show', [
-            'network' => $network->loadMissing('settings'),
+            'network' => $network->loadMissing('settings', 'driver'),
         ]);
     }
 }

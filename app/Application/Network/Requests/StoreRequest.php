@@ -70,6 +70,9 @@ class StoreRequest extends FormRequest implements ContainsDto
 
     public function toGivenDto(string $dto): DataTransferObject
     {
-        return new $dto($this->validated());
+        return new $dto(
+            ...$this->validated(),
+            user: $this->user(),
+        );
     }
 }
