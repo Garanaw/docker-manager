@@ -18,7 +18,7 @@
                                 </p>
                             </div>
                             <div class="flex-shrink-0">
-                                <a href="{{ route('network.show', $network->id) }}" class="text-sm font-medium leading-5 text-gray-500 hover:text-gray-900 dark:text-gray-100">
+                                <a href="{{ route('networks.show', $network->id) }}" class="text-sm font-medium leading-5 text-gray-500 hover:text-gray-900 dark:text-gray-100">
                                     View
                                 </a>
                             </div>
