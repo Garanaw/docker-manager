@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Infrastructure\Shared\Models;
 
+use App\Infrastructure\Shared\Concerns\ModelHasName;
 use Infrastructure\Network\Models\Network;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +15,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Jetstream\HasTeams;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -23,6 +25,8 @@ class User extends Authenticatable implements MustVerifyEmail
     use HasTeams;
     use Notifiable;
     use SoftDeletes;
+    use HasRoles;
+    use ModelHasName;
 
     /** @var array<int, string> */
     protected $fillable = [
