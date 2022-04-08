@@ -1,57 +1,49 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Actions\Fortify;
 
-use Infrastructure\Shared\Models\Teams\Team;
+use App\Application\Shared\Rules\Rule;
+use App\Domain\User\Dto\CreateUserDto;
+use App\Domain\User\Services\Creator;
+use Illuminate\Config\Repository as Config;
+use Illuminate\Hashing\HashManager;
+use Illuminate\Validation\Factory;
 use Infrastructure\Shared\Models\User;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Validator;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
-use Laravel\Jetstream\Jetstream;
 
 class CreateNewUser implements CreatesNewUsers
 {
     use PasswordValidationRules;
 
-    /**
-     * Create a newly registered user.
-     *
-     * @param  array  $input
-     * @return User
-     */
-    public function create(array $input)
-    {
-        Validator::make($input, [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => $this->passwordRules(),
-            'terms' => Jetstream::hasTermsAndPrivacyPolicyFeature() ? ['required', 'accepted'] : '',
-        ])->validate();
-
-        return DB::transaction(function () use ($input) {
-            return tap(User::create([
-                'name' => $input['name'],
-                'email' => $input['email'],
-                'password' => Hash::make($input['password']),
-            ]), function (User $user) {
-                $this->createTeam($user);
-            });
-        });
+    public function __construct(
+        private Creator $creator,
+        private Config $config,
+        private Factory $validator,
+        private HashManager $hasher
+    ) {
     }
 
-    /**
-     * Create a personal team for the user.
-     *
-     * @param  User  $user
-     * @return void
-     */
-    protected function createTeam(User $user)
+    public function create(array $input): User
     {
-        $user->ownedTeams()->save(Team::forceCreate([
-            'user_id' => $user->id,
-            'name' => explode(' ', $user->name, 2)[0]."'s Team",
-            'personal_team' => true,
-        ]));
+        $this->validator->make($input, $this->rules())->validate();
+
+        $input['password'] = $this->hasher->make($input['password']);
+
+        $properties = array_filter($input, function ($key) {
+            return in_array($key, (new User())->getFillable());
+        }, ARRAY_FILTER_USE_KEY);
+
+        return $this->creator->create(new CreateUserDto($properties));
+    }
+
+    private function rules(): array
+    {
+        return [
+            'name' => Rule::nameRules(),
+            'email' => Rule::emailRules(),
+            'password' => Rule::passwordRules(),
+        ];
     }
 }
