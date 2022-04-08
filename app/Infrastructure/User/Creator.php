@@ -30,11 +30,11 @@ class Creator
                     'personal_team' => true,
                 ]));
 
-                $roles = $data->hasRoles()
+                $role = $data->hasRoles()
                     ? $data->getRoles()
-                    : $this->roleModel->where('name', 'user')->get();
+                    : $this->roleModel->where('name', 'user')->first();
 
-                $user->assignRole($roles);
+                $user->assignRole($role);
             });
         });
     }
