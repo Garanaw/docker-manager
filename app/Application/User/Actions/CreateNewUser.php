@@ -2,8 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Actions\Fortify;
+namespace App\Application\User\Actions;
 
+use App\Actions\Fortify\PasswordValidationRules;
 use App\Application\Shared\Rules\Rule;
 use App\Domain\User\Dto\CreateUserDto;
 use App\Domain\User\Services\Creator;
