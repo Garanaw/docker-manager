@@ -21,7 +21,7 @@
 
                         <section class="flex items-baseline">
                             <div class="flex flex-col w-1/2">
-                                <label for="driver">{{ __('shared.driver') }}</label>
+                                <label for="driver">{{ __('network.driver') }}</label>
                                 <select name="driver" id="driver" class="block px-4 py-2 leading-tight text-gray-200 bg-gray-900 border border-gray-900 rounded-lg" required>
                                     <option value="">{{ __('shared.select') }}</option>
                                     @foreach(Domain\Network\Enum\Driver::getCreatable() as $driver)
