@@ -8,7 +8,7 @@ use Infrastructure\Migration\Blueprint;
 use Infrastructure\Migration\Migration;
 use Spatie\Permission\PermissionRegistrar;
 
-class CreatePermissionTables extends Migration
+return new class extends Migration
 {
     protected ?string $table = 'permissions';
 
@@ -128,4 +128,4 @@ class CreatePermissionTables extends Migration
         $this->schema->drop($tableNames['roles']);
         $this->schema->drop($tableNames['permissions']);
     }
-}
+};
