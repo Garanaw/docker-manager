@@ -26,8 +26,12 @@ class Creator
             return tap($this->model->create($data->toArray()), function (User $user) use ($data) {
                 $this->teamsCreator->createPersonalTeam($user);
 
+                $roleName = $data->hasRole()
+                    ? $data->getRole()
+                    : 'admin';
+
                 /** @var Role $role */
-                $role = $this->role->where('name', '=', Str::lower('admin'))->first();
+                $role = $this->role->where('name', '=', Str::lower($roleName))->first();
                 setPermissionsTeamId($user->refresh()->personalTeam()->getId());
                 $user->assignRole($role);
             });
