@@ -20,7 +20,7 @@ class CreateUserDto extends DataTransferObject implements Arrayable
     public string $name;
     public string $email;
     public string $password;
-    public Carbon $email_verified_at;
+    public ?Carbon $email_verified_at;
     public ?string $role_name = null;
 
     public function hasRole(): bool

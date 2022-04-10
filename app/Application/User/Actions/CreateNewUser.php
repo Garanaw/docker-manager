@@ -36,6 +36,8 @@ class CreateNewUser implements CreatesNewUsers
             return in_array($key, (new User())->getFillable());
         }, ARRAY_FILTER_USE_KEY);
 
+        $properties['role_name'] = 'admin';
+
         return $this->creator->create(new CreateUserDto($properties));
     }
 
