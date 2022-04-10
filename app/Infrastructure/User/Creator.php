@@ -7,15 +7,15 @@ namespace App\Infrastructure\User;
 use App\Domain\User\Dto\CreateUserDto;
 use App\Infrastructure\Shared\Models\Permissions\Role;
 use Illuminate\Database\DatabaseManager as DB;
-use Infrastructure\Shared\Models\Teams\Team;
+use Illuminate\Support\Str;
 use Infrastructure\Shared\Models\User;
 
 class Creator
 {
     public function __construct(
         private User $model,
-        private Team $teamModel,
-        private Role $roleModel,
+        private TeamsCreator $teamsCreator,
+        private Role $role,
         private DB $db
     ) {
     }
@@ -23,17 +23,12 @@ class Creator
     public function create(CreateUserDto $data): User
     {
         return $this->db->transaction(function () use ($data) {
-            return tap($this->model->create($data->getUserData()), function (User $user) use ($data) {
-                $user->ownedTeams()->save($this->teamModel->forceCreate([
-                    'user_id' => $user->id,
-                    'name' => explode(' ', $user->name, 2)[0]."'s Team",
-                    'personal_team' => true,
-                ]));
+            return tap($this->model->create($data->toArray()), function (User $user) use ($data) {
+                $this->teamsCreator->createPersonalTeam($user);
 
-                $role = $data->hasRoles()
-                    ? $data->getRoles()
-                    : $this->roleModel->where('name', 'user')->first();
-
+                /** @var Role $role */
+                $role = $this->role->where('name', '=', Str::lower('admin'))->first();
+                setPermissionsTeamId($user->refresh()->personalTeam()->getId());
                 $user->assignRole($role);
             });
         });
