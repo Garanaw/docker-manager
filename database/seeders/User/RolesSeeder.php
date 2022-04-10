@@ -32,6 +32,13 @@ class RolesSeeder extends Seeder
                 'created_at' => $this->now,
                 'updated_at' => $this->now,
             ],
+            [
+                'team_id' => null,
+                'name' => 'user',
+                'guard_name' => 'web',
+                'created_at' => $this->now,
+                'updated_at' => $this->now,
+            ],
         ];
     }
 }
