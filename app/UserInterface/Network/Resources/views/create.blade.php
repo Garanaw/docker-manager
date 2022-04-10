@@ -41,10 +41,18 @@
                         </section>
 
                         <section class="flex items-baseline">
-                            <div class="flex flex-col w-1/3">
+                            <div class="flex flex-col w-1/2">
                                 <label for="gateway">{{ __('network.gateway') }}</label>
                                 <input type="text" name="gateway" id="gateway" class="block px-4 py-2 leading-tight text-gray-200 bg-gray-900 border border-gray-900 rounded-lg">
                             </div>
+
+                            <div class="flex flex-col w-1/2">
+                                <label for="subnet">{{ __('network.subnet') }}</label>
+                                <input type="text" name="subnet" id="subnet" class="block px-4 py-2 leading-tight text-gray-200 bg-gray-900 border border-gray-900 rounded-lg">
+                            </div>
+                        </section>
+
+                        <section class="flex items-baseline">
                             <div class="flex flex-col w-1/3 items-center">
                                 <label for="attachable">{{ __('network.attachable') }}</label>
                                 <input
