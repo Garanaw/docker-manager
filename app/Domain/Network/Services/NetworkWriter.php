@@ -10,7 +10,7 @@ use Infrastructure\Network\Repositories\NetworkWriter as Writer;
 
 class NetworkWriter
 {
-    public function __construct(private Writer $writer)
+    public function __construct(private readonly Writer $writer)
     {
     }
 
