@@ -9,6 +9,7 @@ return [
     'network' => [
         'providers' => [
             Domain\Network\Providers\ViewServiceProvider::class,
+            App\Domain\Network\Providers\BladeServiceProvider::class,
         ],
     ],
 ];
