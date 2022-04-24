@@ -9,7 +9,7 @@ use Illuminate\View\Compilers\BladeCompiler;
 
 abstract class BladeServiceProvider extends ServiceProvider
 {
-    private const SHARED_NAMESPACE = 'Infrastructure\\Shared\\Components';
+    private const SHARED_NAMESPACE = 'UserInterface\\Shared\\Components';
     private const SHARED_PREFIX = 'shared';
 
     protected BladeCompiler $bladeCompiler;
