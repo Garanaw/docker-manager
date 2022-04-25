@@ -19,16 +19,11 @@ return new class extends Migration
 
     public function up(): void
     {
-        $config = config('permission');
-        $tableNames = $config['table_names'];
-        $columnNames = $config['column_names'];
-        $teams = $config['teams'];
+        $tableNames = config('permission.table_names');
+        $columnNames = config('permission.column_names');
 
         if (empty($tableNames)) {
             throw new \Exception('Error: config/permission.php not loaded. Run [php artisan config:clear] and try again.');
-        }
-        if ($teams && empty($columnNames['team_foreign_key'] ?? null)) {
-            throw new \Exception('Error: team_foreign_key on config/permission.php not loaded. Run [php artisan config:clear] and try again.');
         }
 
         $this->schema->create($tableNames['permissions'], function (Blueprint $table) {
@@ -40,17 +35,15 @@ return new class extends Migration
             $table->unique(['name', 'guard_name']);
         });
 
-        $this->schema->create($tableNames['roles'], function (Blueprint $table) use ($teams, $columnNames) {
+        $this->schema->create($tableNames['roles'], function (Blueprint $table) use ( $columnNames) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger($columnNames['team_foreign_key'])->nullable();
             $table->string('name', 125);       // For MySQL 8.0 use string('name', 125);
             $table->string('guard_name', 125); // For MySQL 8.0 use string('guard_name', 125);
             $table->timestamps();
-            $table->index($columnNames['team_foreign_key'], 'roles_team_foreign_key_index');
-            $table->unique([$columnNames['team_foreign_key'], 'name', 'guard_name']);
+            $table->unique(['name', 'guard_name']);
         });
 
-        $this->schema->create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames, $teams) {
+        $this->schema->create($tableNames['model_has_permissions'], function (Blueprint $table) use ($tableNames, $columnNames) {
             $table->unsignedBigInteger(PermissionRegistrar::$pivotPermission);
 
             $table->string('model_type');
@@ -62,16 +55,13 @@ return new class extends Migration
                 ->on($tableNames['permissions'])
                 ->onDelete('cascade');
 
-            $table->unsignedBigInteger($columnNames['team_foreign_key']);
-            $table->index($columnNames['team_foreign_key'], 'model_has_permissions_team_foreign_key_index');
-
             $table->primary(
-                [$columnNames['team_foreign_key'], PermissionRegistrar::$pivotPermission, $columnNames['model_morph_key'], 'model_type'],
+                [PermissionRegistrar::$pivotPermission, $columnNames['model_morph_key'], 'model_type'],
                 'model_has_permissions_permission_model_type_primary'
             );
         });
 
-        $this->schema->create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames, $teams) {
+        $this->schema->create($tableNames['model_has_roles'], function (Blueprint $table) use ($tableNames, $columnNames) {
             $table->unsignedBigInteger(PermissionRegistrar::$pivotRole);
 
             $table->string('model_type');
@@ -83,13 +73,10 @@ return new class extends Migration
                 ->on($tableNames['roles'])
                 ->onDelete('cascade');
 
-                $table->unsignedBigInteger($columnNames['team_foreign_key']);
-                $table->index($columnNames['team_foreign_key'], 'model_has_roles_team_foreign_key_index');
-
-                $table->primary(
-                    [$columnNames['team_foreign_key'], PermissionRegistrar::$pivotRole, $columnNames['model_morph_key'], 'model_type'],
-                    'model_has_roles_role_model_type_primary'
-                );
+            $table->primary(
+                [PermissionRegistrar::$pivotRole, $columnNames['model_morph_key'], 'model_type'],
+                'model_has_roles_role_model_type_primary'
+            );
         });
 
         $this->schema->create($tableNames['role_has_permissions'], function (Blueprint $table) use ($tableNames) {
