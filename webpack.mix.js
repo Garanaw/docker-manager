@@ -1,4 +1,5 @@
 const mix = require('laravel-mix');
+const {autoload} = require("laravel-mix");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,7 +12,13 @@ const mix = require('laravel-mix');
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
+mix
+    .js('resources/js/app.js', 'public/js')
+    .js('resources/js/network/create/create-network.js', 'public/js/network/create.js')
+    autoload({
+        jquery: ['$', 'window.jQuery', 'jQuery'],
+        'popper.js': ['Popper'],
+    })
     .postCss('resources/css/app.css', 'public/css', [
         require('postcss-import'),
         require('tailwindcss'),
