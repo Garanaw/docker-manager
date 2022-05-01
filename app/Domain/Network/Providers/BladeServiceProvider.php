@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Network\Providers;
+namespace Domain\Network\Providers;
 
-use App\Domain\Shared\Providers\BladeServiceProvider as ServiceProvider;
+use Domain\Shared\Providers\BladeServiceProvider as ServiceProvider;
 
 class BladeServiceProvider extends ServiceProvider
 {

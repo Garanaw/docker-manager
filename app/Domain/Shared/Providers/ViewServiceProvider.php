@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Domain\Shared\Providers;
+namespace Domain\Shared\Providers;
 
 use Illuminate\Support\ServiceProvider;
 

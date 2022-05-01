@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Application\Network\Actions;
+namespace Application\Network\Actions;
 
 class Start
 {

@@ -9,7 +9,13 @@ return [
     'network' => [
         'providers' => [
             Domain\Network\Providers\ViewServiceProvider::class,
-            App\Domain\Network\Providers\BladeServiceProvider::class,
+            Domain\Network\Providers\BladeServiceProvider::class,
+        ],
+    ],
+    'shared' => [
+        'providers' => [
+            Domain\Shared\Providers\ViewServiceProvider::class,
+            Domain\Shared\Providers\BladeServiceProvider::class,
         ],
     ],
 ];
