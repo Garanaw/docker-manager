@@ -5,4 +5,5 @@ return [
 
     'name' => 'Name',
     'description' => 'Description',
+    'select' => 'Select',
 ];
